@@ -1,0 +1,101 @@
+#include<stdio.h>
+
+ 
+
+int a[100];
+
+int top=-1;
+
+void push(int x)
+
+{
+
+              a[++top]=x;
+
+}
+
+int pop()
+
+{
+
+              return a[top--];
+
+}
+
+void main()
+
+{
+
+              char b[100],*p;
+
+              scanf("%s",b);
+
+              int m,n,x,c;
+
+              p=b;
+
+              while(*p!='\0')
+
+              {
+
+                           if(isdigit(*p))
+
+                           {
+
+                                         x=*p-48;
+
+                                         push(x);
+
+                           }
+
+                          
+
+                           else
+
+                           {
+
+                                         m=pop();
+
+                                         n=pop();
+
+                                         switch(*p)
+
+                                         {
+
+                                                       case '+':             c=n+m;
+
+                                                                                  break;
+
+                                                                                 
+
+                                                       case '-':              c=n-m;
+
+                                                                                  break;
+
+                                                                                 
+
+                                                       case '*':             c=n*m;
+
+                                                                                  break;
+
+                                                                                 
+
+                                                       case '/':             c=n/m;
+
+                                                                                  break;
+
+                                         }
+
+                                         push(c);
+
+                           }
+
+                           p++;
+
+              }
+
+              printf("%d",a[top]);
+
+             
+
+}
