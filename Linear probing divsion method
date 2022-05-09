@@ -1,0 +1,114 @@
+#include<stdio.h>
+#define m 10
+struct node
+{
+	int n;
+}a[10];
+void insertion()
+{
+	int x,y,i;
+	printf("enter element=");
+	scanf("%d",&x);
+	y=x%m;
+	if(a[y].n==0)
+	a[y].n=x;
+	else
+	{
+		for(i=1;i<m;i++)
+		{
+			if(a[y+i].n==0)
+			{
+				a[y+i].n=x;
+				break;
+			}
+		}
+	}
+}
+void deletion()
+{
+	int x,y,i,c=0;
+	printf("enter element=");
+	scanf("%d",&x);
+	y=x%m;
+	if(a[y].n!=0)
+	{
+		a[y].n=0;
+		c++;
+	}
+	else
+	{
+		for(i=1;i<m;i++)
+		{
+			if(a[y+i].n==x)
+			{
+				a[y+i].n=0;
+				c++;
+				break;
+			}
+		}
+	}
+	if(c==0)
+	printf("element not found");
+}
+void search()
+{
+	int x,y,i,c=0;
+	printf("enter element=");
+	scanf("%d",&x);
+	y=x%m;
+	if(a[y].n!=0)
+	{
+		c++;
+	}
+	else
+	{
+		for(i=1;i<m;i++)
+		{
+			if(a[y+i].n==x)
+			{
+				c++;
+				break;
+			}
+		}
+	}
+	if(c==0)
+	printf("element not found");
+	else
+	printf("element found");
+}
+void display()
+{
+	int i;
+	for(i=0;i<m;i++)
+	printf("%d ",a[i].n);
+}
+int main()
+{
+	int choice;
+    do
+    {
+        printf("\n*********Main Menu*********\n");
+        printf("\nChoose one option from the following list ...\n");
+        printf("\n1.insertion\n2.deletion\n3.search\n4.display\n5.exit\n");
+        printf("\nEnter your choice?\n");
+        scanf("\n%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            		insertion();
+            		break;
+            case 2:
+            		deletion();
+            		break;
+            case 3:
+           			search();
+           			break;
+            case 4:
+           			display();
+            		break;
+            case 5:
+            		break;
+        }
+    }while(choice!=5);
+	return 0;	
+}
