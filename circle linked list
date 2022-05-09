@@ -1,0 +1,254 @@
+#include<stdio.h>
+#include<limits.h>
+#include<stdlib.h>
+struct node
+{
+	int n;
+	struct node *next;
+}*start=NULL,*newnode,*ptr,*ptr1;
+
+void create()
+{
+	newnode=malloc(sizeof(struct node));
+	printf("enter value=");
+	scanf("%d",&newnode->n);
+	if(start==NULL)
+	{
+		start=newnode;
+		newnode->next=start;	
+	}
+	else
+	{
+		ptr=start;
+		
+		while(ptr->next!=start)
+		ptr=ptr->next;
+		
+		ptr->next=newnode;
+		newnode->next=start;
+	}
+}
+
+void insertatbegin()
+{
+	newnode=malloc(sizeof(struct node));
+	printf("enter value=");
+	scanf("%d",&newnode->n);
+	
+	ptr=start;
+	while(ptr->next!=start)
+	ptr=ptr->next;
+	
+	newnode->next=start;
+	ptr->next=newnode;
+	start=newnode;
+}
+
+void insertatend()
+{
+	newnode=malloc(sizeof(struct node));
+	printf("enter value=");
+	scanf("%d",&newnode->n);
+	ptr=start;
+	while(ptr->next!=start)
+		ptr=ptr->next;
+	ptr->next=newnode;
+	newnode->next=start;
+}
+
+void display()
+{
+	ptr=start;
+	do
+	{
+		printf("%d ",ptr->n);
+		ptr=ptr->next;
+	}while(ptr!=start);
+}
+
+void count()
+{
+	ptr=start;
+	int c=0;
+	do
+	{
+		c++;
+		ptr=ptr->next;
+	}while(ptr!=start);
+	printf("%d",c);
+}
+
+void deleteatbegin()
+{
+	ptr=start;
+	ptr1=start;
+	while(ptr1->next!=start)
+	{
+		ptr1=ptr1->next;
+	}
+	start=start->next;
+	ptr1->next=start;
+	free(ptr);
+}
+
+void deleteatend()
+{
+	ptr=start;
+	while(ptr->next!=start)
+	{
+		ptr1=ptr;
+		ptr=ptr->next;
+	}
+	ptr1->next=start;
+	free(ptr);
+}
+
+void insertatanypos()
+{
+	newnode=malloc(sizeof(struct node));
+	printf("enter value=");
+	scanf("%d",&newnode->n);
+	ptr=start;
+	int pos;
+	printf("enter position=");
+	scanf("%d",&pos);
+	int i=1;
+	while(i!=pos)
+	{
+		ptr1=ptr;
+		ptr=ptr->next;
+		i++;
+	}
+	ptr1->next=newnode;
+	newnode->next=ptr;
+}
+
+void deleteatanypos()
+{
+	struct node *ptr2;
+	ptr=start;
+	int pos;
+	printf("enter position=");
+	scanf("%d",&pos);
+	int i=1;
+	while(i!=pos)
+	{
+		ptr1=ptr;
+		ptr=ptr->next;
+		i++;
+	}
+	ptr1->next=ptr->next;
+	ptr2=ptr->next;
+	free(ptr);
+}
+
+void search()
+{
+	int val;
+	printf("enter search element=");
+	scanf("%d",&val);
+	ptr=start;
+	int i=1;
+	int x=0;
+	do
+	{
+		if(ptr->n==val)
+		{
+			x++;
+			break;
+		}
+		ptr=ptr->next;
+		i++;
+	}while(ptr!=start);
+	if(x==0)
+	printf("element not found");
+	else
+	printf("element found at %d position",i);
+}
+
+void maximum()
+{
+	ptr=start;
+	int max=INT_MIN;
+	do
+	{
+		if(ptr->n > max)
+		max=ptr->n;
+		
+		ptr=ptr->next;
+	}while(ptr!=start);
+	printf("%d",max);
+}
+void minimum()
+{
+	ptr=start;
+	int min=INT_MAX;
+	do
+	{
+		if(ptr->n < min)
+		min=ptr->n;
+		
+		ptr=ptr->next;
+	}while(ptr!=start);
+	printf("%d",min);
+}
+
+int main()
+{
+	int choice;
+	do
+	{
+		printf("\n*CIRCULAR SINGLE LINKEDLIST MENU*\n");
+		printf("1.create\n2.insertAtBegin\n3.insertAtEnd\n");
+		printf("4.display\n5.count\n6.deleteAtBegin\n");
+		printf("7.deleteAtEnd\n8.insertAtAnyPos\n9.delerteAtAnyPos\n10.Maximum\n");
+		printf("11.Minimum\n12.search\n13.exit\n");
+		printf("Enter your choice=");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				create();
+				break;
+			case 2:
+				insertatbegin();
+				break;
+			case 3:
+				insertatend();
+				
+				break;
+			case 4:
+				display();
+				break;
+			case 5:
+				count();
+				break;
+			case 6:
+				deleteatbegin();
+				
+				break;
+			case 7:
+				deleteatend();
+				break;
+			case 8:
+				insertatanypos();
+				break;
+			case 9:
+				deleteatanypos();
+				break;
+			case 10:
+				maximum();
+				break;
+			case 11:
+				minimum();
+				break;
+			case 12:
+				search();
+				break;		
+			case 13:
+				break;
+		}
+	}while(choice!=13);
+}//main
+
+
