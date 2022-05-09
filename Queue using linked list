@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct queue
+{
+	int n;
+	struct node *next;
+}*front=NULL,*rear=NULL,*newnode,*ptr;
+
+void enqueue()
+{
+	newnode=malloc(sizeof(struct queue));
+	printf("enter value=");
+	scanf("%d",&newnode->n);
+	if(front==NULL&&rear==NULL)
+	{
+		front=newnode;
+		rear=newnode;
+		newnode->next=NULL;
+	}
+	else
+	{
+		rear->next=newnode;
+		rear=newnode;
+		newnode->next=NULL;
+	}
+}
+void dequeue()
+{
+	if(front==NULL&&rear==NULL)
+	printf("queue is empty");
+	else
+	{
+		ptr=front;
+		front=front->next;
+		free(ptr);
+	}
+}
+void display()
+{
+	ptr=front;
+	while(ptr!=NULL)
+	{
+		printf("%d ",ptr->n);
+		ptr=ptr->next;
+	}
+	printf("\n");
+}
+
+void main()
+{
+	int choice;
+	do
+	{
+		printf("*queue menu*\n");
+		printf("1.enqueue\n");
+		printf("2.dequeue\n");
+		printf("3.display\n");
+		printf("4.exit\n");
+		printf("enter your choice=");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				enqueue();
+				break;
+			case 2:
+				dequeue();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				break;	
+		}
+	}while(choice!=4);
+}
